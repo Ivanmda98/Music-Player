@@ -1,6 +1,9 @@
 import './song-card-component.css';
+import songCardHook from './song-card-hook';
 
 function SongCardComponent() {
+    const {play, isPlaying, nextSong, previousSong} = songCardHook();
+
     return (
       <>
        <div className="container-card-song">
@@ -22,13 +25,17 @@ function SongCardComponent() {
                 </div>
             </div>
             <div className="container-options-multimedia">
-                <div>
+                <div id='option-previous-song' onClick={() => {previousSong}}>
                     <img src="../public/images/Stop_and_play_fill-1.svg" alt="" />
                 </div>
-                <div id='option-play'>
-                    <img src="./public/images/Play_fill.svg" alt="" />
+                <div id='option-play' onClick={play}>
+                    <img 
+                    id={isPlaying? 'pause': 'play'}
+                    src={isPlaying? "./public/images/Pause_fill.svg"
+                        : "./public/images/Play_fill.svg"
+                    } alt="" />
                 </div>
-                <div>
+                <div id = 'option-next-song' onClick={() => nextSong()}>
                     <img src="../public/images/Stop_and_Play_fill.svg" alt="" />
                 </div>
             </div>

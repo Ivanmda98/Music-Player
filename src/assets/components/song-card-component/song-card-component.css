@@ -103,6 +103,10 @@
     border-radius: 50%;
 }
 
+#option-next-song {
+    
+}
+
 @media (min-width: 900px) {
     .container-card-song{
         width: 316px;
