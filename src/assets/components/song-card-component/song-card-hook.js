@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { useState } from "react";
 
-function songCardHook(songsList){
+function songCardHook(cardsList){
     const audioRef = useRef(null);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isPlaying, setIsPlaying] = useState(false);
@@ -31,7 +31,7 @@ function songCardHook(songsList){
 
     const nextSong = () => {
         setIsPlaying(false);
-        if(currentIndex < songsList.length -1) {
+        if(currentIndex < cardsList.length -1) {
             audioRef.current.pause();
             setSongDuration({key: '', minutes: '00', seconds: '00'})
             setCurrentIndex(prevIndex => prevIndex + 1);

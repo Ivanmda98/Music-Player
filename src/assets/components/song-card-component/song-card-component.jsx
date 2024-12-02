@@ -3,12 +3,19 @@ import './song-card-component.css';
 import songCardHook from './song-card-hook';
 
 function SongCardComponent() {
-    const path = '../public/songs/';
-    const songsList =[
-        `${path}forest-lullaby-110624.mp3`,
-        `${path}lost-in-city-lights-145038.mp3`,
-        `${path}forest-lullaby-110624.mp3`,
-        `${path}lost-in-city-lights-145038.mp3`
+    const cardsList = [
+        {
+            song: '../public/songs/forest-lullaby-110624.mp3',
+            imageSong: '../public/images/cover-1.png',
+            titleSong: 'Forest Lullaby',
+            author: 'Cosmo Sheldrake'
+        },
+        {
+            song: '../public/songs/lost-in-city-lights-145038.mp3',
+            imageSong: '../public/images/cover-2.png',
+            titleSong: 'Lost in the City Lights',
+            author: 'Lesfm'
+        }
     ];
     const {
         play,
@@ -21,19 +28,17 @@ function SongCardComponent() {
         currentTime,
         progress,
         audioRef
-    } = songCardHook(songsList);
-
-    
+    } = songCardHook(cardsList);
 
     return (
       <>
        <div className="container-card-song">
         <div className="container-image-song">
-            <img src="../public/images/cover-1.png" alt="song-image" />
+            <img src={cardsList[currentIndex].imageSong} alt="song-image" />
         </div>
         <div className="container-info-song">
-            <h3 className="song-name">Lost it all</h3>
-            <p className="author-song">Lost in lona</p>
+            <h3 className="song-name">{cardsList[currentIndex].titleSong}</h3>
+            <p className="author-song">{cardsList[currentIndex].author}</p>
         </div>
         <div className="container-options-songs">
             <div className="container-progress-bar-time">
@@ -44,7 +49,7 @@ function SongCardComponent() {
                 <div className="container-progress-bar">
                     <div className="progress-bar" style={{ width: `${progress}%` }}></div>
                     <audio 
-                        src={`${songsList[currentIndex]}`} 
+                        src={`${cardsList[currentIndex].song}`} 
                         ref={audioRef}
                         onTimeUpdate={songOnTimeUpdate}
                     ></audio>
