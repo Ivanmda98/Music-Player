@@ -1,8 +1,29 @@
+import { useRef, useState, useEffect } from 'react';
 import './song-card-component.css';
 import songCardHook from './song-card-hook';
 
 function SongCardComponent() {
-    const {play, isPlaying, nextSong, previousSong} = songCardHook();
+    const path = '../public/songs/';
+    const songsList =[
+        `${path}forest-lullaby-110624.mp3`,
+        `${path}lost-in-city-lights-145038.mp3`,
+        `${path}forest-lullaby-110624.mp3`,
+        `${path}lost-in-city-lights-145038.mp3`
+    ];
+    const {
+        play,
+        nextSong,
+        previousSong,
+        songOnTimeUpdate,
+        isPlaying,
+        currentIndex,
+        songDuration,
+        currentTime,
+        progress,
+        audioRef
+    } = songCardHook(songsList);
+
+    
 
     return (
       <>
@@ -17,15 +38,20 @@ function SongCardComponent() {
         <div className="container-options-songs">
             <div className="container-progress-bar-time">
                 <div className='container-times'>
-                    <div className='timer' id='current-time'>02:33</div>
-                    <div className='timer' id='end-time'>04:00</div>
+                    <div className='timer' id='current-time'>{`${currentTime.minutes}:${currentTime.seconds}`}</div>
+                    <div className='timer' id='end-time'>{`${songDuration.minutes}:${songDuration.seconds}`}</div>
                 </div>
                 <div className="container-progress-bar">
-                    <div className="progress-bar"></div>
+                    <div className="progress-bar" style={{ width: `${progress}%` }}></div>
+                    <audio 
+                        src={`${songsList[currentIndex]}`} 
+                        ref={audioRef}
+                        onTimeUpdate={songOnTimeUpdate}
+                    ></audio>
                 </div>
             </div>
             <div className="container-options-multimedia">
-                <div id='option-previous-song' onClick={() => {previousSong}}>
+                <div id='option-previous-song' onClick={previousSong}>
                     <img src="../public/images/Stop_and_play_fill-1.svg" alt="" />
                 </div>
                 <div id='option-play' onClick={play}>
@@ -35,7 +61,7 @@ function SongCardComponent() {
                         : "./public/images/Play_fill.svg"
                     } alt="" />
                 </div>
-                <div id = 'option-next-song' onClick={() => nextSong()}>
+                <div id = 'option-next-song' onClick={nextSong}>
                     <img src="../public/images/Stop_and_Play_fill.svg" alt="" />
                 </div>
             </div>
