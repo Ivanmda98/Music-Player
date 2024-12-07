@@ -17,6 +17,7 @@ function SongCardComponent() {
             author: 'Lesfm'
         }
     ];
+    
     const {
         play,
         nextSong,
